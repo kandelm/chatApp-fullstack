@@ -1,0 +1,14 @@
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const { Message, Conversation } = require('../models');
+const auth = require('../middleware/auth');
+const uploadsDir = 'src/uploads';
+if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+const storage = multer.diskStorage({ destination: function (req, file, cb) { cb(null, uploadsDir); }, filename: function (req, file, cb) { cb(null, Date.now()+path.extname(file.originalname)); } });
+const upload = multer({ storage });
+const router = express.Router();
+router.get('/:conversationId', auth, async (req,res)=>{ const messages = await Message.findAll({ where: { conversationId: req.params.conversationId }, order: [['createdAt','ASC']] }); res.json(messages); });
+router.post('/:conversationId', auth, upload.single('image'), async (req,res)=>{ const conversationId = req.params.conversationId; const text = req.body.text || null; const imageUrl = req.file ? `/uploads/${req.file.filename}` : null; const msg = await Message.create({ conversationId, senderId: req.user.id, text, imageUrl }); await Conversation.update({ lastMessageAt: new Date() }, { where: { id: conversationId }}); res.json(msg); });
+module.exports = router;
