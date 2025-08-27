@@ -120,8 +120,6 @@ NEXT_PUBLIC_SOCKET_URL=http://localhost:4000
 - UI is built with Tailwind CSS. Edit `frontend/pages` and `frontend/styles` for custom styles.
 - Backend uses Sequelize models. Add fields or relations in `backend/src/models`.
 
-## License
-MIT
 
 ## Author
 - [kandelm](https://github.com/kandelm)
