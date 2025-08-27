@@ -19,11 +19,10 @@ A modern fullstack chat application built with Node.js (Express), MySQL, Next.js
 
 ## Getting Started
 
-### Prerequisites
-- Docker & Docker Compose installed
-- Node.js & npm (for local development)
+### Recommended: Docker Compose
 
-### Local Development
+The easiest and best way to run this app is using Docker Compose. All services (frontend, backend, database) will be started and connected automatically.
+
 1. Clone the repository:
    ```sh
    git clone https://github.com/kandelm/chatApp-fullstack.git
@@ -32,29 +31,30 @@ A modern fullstack chat application built with Node.js (Express), MySQL, Next.js
 2. Configure environment variables:
    - Edit `backend/.env` for MySQL and JWT secrets
    - Edit `frontend/.env` for API URLs
-3. Install dependencies:
+3. Build and start all services:
+   ```sh
+   docker compose up --build
+   ```
+4. The app will be available at [http://localhost:3000](http://localhost:3000)
+
+### Local Development (Advanced)
+If you prefer to run backend and frontend separately:
+1. Install dependencies:
    ```sh
    cd backend && npm install
    cd ../frontend && npm install
    ```
-4. Start backend:
+2. Start backend:
    ```sh
    cd backend
    npm run dev
    ```
-5. Start frontend:
+3. Start frontend:
    ```sh
    cd ../frontend
    npm run dev
    ```
-6. Visit [http://localhost:3000](http://localhost:3000)
-
-### Docker Deployment
-1. Build and start all services:
-   ```sh
-   docker compose up --build
-   ```
-2. The app will be available at [http://localhost:3000](http://localhost:3000)
+4. Visit [http://localhost:3000](http://localhost:3000)
 
 ## Project Structure
 ```
