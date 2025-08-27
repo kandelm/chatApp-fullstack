@@ -34,6 +34,9 @@ export default function Inbox(){
     <div className="min-h-screen bg-gray-50 flex">
       <aside className="w-80 bg-white shadow-lg p-6 flex flex-col gap-6">
         <h2 className="text-3xl font-bold mb-2 text-blue-700">Inbox</h2>
+        {loggedInUser && (
+          <div className="mb-4 text-lg font-bold text-blue-700">Welcome, {loggedInUser.username}</div>
+        )}
         <div className="flex gap-2 mb-4">
           {loggedInUser ? (
             <button
